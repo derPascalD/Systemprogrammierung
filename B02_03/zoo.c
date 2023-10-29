@@ -3,15 +3,7 @@
 #include "zoo.h"
 
 
-animal zoo[10] = {
-        {.species = MAMMAL, .food_weight = 20, .name = "Hase", .age = 5},
-        {.species = FISH, .food_weight = 20, .name = "Karpfen", .age = 2},
-        {.species = AMPHIBIAN, .food_weight = 30, .name = "Froesche", .age = 3},
-        {.species = BIRD, .food_weight = 40, .name = "Taube", .age = 4}
-};
-
-
-float calculate_average_age() {
+float calculate_average_age(animal zoo[]) {
     float summeAlter = 0;
     int anzahlTiere = 0;
     int i;
@@ -26,7 +18,7 @@ float calculate_average_age() {
     return summeAlter / anzahlTiere;
 }
 
-void more_food() {
+void more_food(animal zoo[]) {
     int counter;
     while (zoo[counter].age > 0)
     {
@@ -58,7 +50,7 @@ void print_animal(animal a) {
     printf("%-15s| %-15s| %-15d| %-15.2f|\n", a.name,name,a.age,a.food_weight);
 }
 
-void print_zoo(){
+void print_zoo(animal zoo[]){
     int i;
     printf("%-15s| %-15s| %-15s| %-15s|\n", "Tier Name","Spezies","Alter", "Essens Gewicht");
     printf("-------------------------------------------------------------------\n");

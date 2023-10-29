@@ -45,7 +45,7 @@ run: install
 
 .PHONY: clean
 clean:
-	rm -rf mytest $(OBJS)
+	rm -rf zooProgramm $(OBJS)
 
 .PHONY: distclean
 distclean: clean
