@@ -4,7 +4,7 @@
 
 animal mammal, fish, amphibian, bird;
 
-animal zoo[10];
+animal zoo[ANIMALCOUNT];
 
 int main()
 {

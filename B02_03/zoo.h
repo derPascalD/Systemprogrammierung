@@ -19,7 +19,6 @@ typedef struct {
 } animal;
 
 
-
 float calculate_average_age(animal zoo[]);
 
 void more_food(animal zoo[]);

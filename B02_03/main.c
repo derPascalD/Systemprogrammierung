@@ -4,9 +4,10 @@
 
 animal mammal, fish, amphibian, bird;
 
-animal zoo[10];
+animal zoo[ANIMALCOUNT];
 
-int main() {
+int main()
+{
 
     float durchschnitt;
     mammal.species = MAMMAL;
@@ -37,11 +38,11 @@ int main() {
     durchschnitt = calculate_average_age(zoo);
     printf("%.2f\n\n", durchschnitt);
 
-    
-    print_animal(mammal);
-    print_animal(fish);
-    print_animal(amphibian);
-    print_animal(bird);
+    print_animal(zoo[0]);
+    print_animal(zoo[1]);
+    print_animal(zoo[2]);
+    print_animal(zoo[3]);
+
     more_food(zoo);
     print_zoo(zoo);
     return 0;
