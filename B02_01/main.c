@@ -25,13 +25,13 @@ void more_food(void);
 void print_animal(animal);
 void print_zoo(void);
 
-animal mammal, fish, amphibian, bird;
-
 animal zoo[10];
 
 int main()
 {
+    animal mammal, fish, amphibian, bird;
     float durchschnitt;
+
     mammal.species = MAMMAL;
     mammal.food_weight = 20;
     strcpy(mammal.name, "Hase");
@@ -73,7 +73,7 @@ int main()
     return 0;
 }
 
-/* Errechnet das Druchschnittsalter von allen Tieren im Zoo*/
+/* Errechnet das Durchschnittsalter von allen Tieren im Zoo*/
 float calculate_average_age()
 {
     float summeAlter = 0;
@@ -92,11 +92,10 @@ float calculate_average_age()
     return summeAlter / anzahlTiere;
 }
 
-/*Hier bekommen die Tiere mehr Futter zugeweisen*/
+/*Hier bekommen die Tiere mehr Futter zugewiesen*/
 void more_food()
 {
-    int counter;
-
+    int counter = 0;
     while (zoo[counter].age > 0)
     {
 
@@ -107,7 +106,7 @@ void more_food()
     printf("\n");
 }
 
-/*Hier werden vom übergebenen Tier die jeweiligen Inforamtionen in der Konsole ausgegeben*/
+/*Hier werden vom übergebenen Tier die jeweiligen Informationen in der Konsole ausgegeben*/
 void print_animal(animal a)
 {
     char name[10];

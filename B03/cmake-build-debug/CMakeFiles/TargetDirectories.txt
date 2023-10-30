@@ -1,0 +1,3 @@
+C:/Users/pasca/OneDrive - fh-bielefeld.de/Studium Pascal/3. Semester Unterlagen/Systemprogrammierung/Praktikum/Systemprogrammierung/B03/cmake-build-debug/CMakeFiles/B03.dir
+C:/Users/pasca/OneDrive - fh-bielefeld.de/Studium Pascal/3. Semester Unterlagen/Systemprogrammierung/Praktikum/Systemprogrammierung/B03/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/pasca/OneDrive - fh-bielefeld.de/Studium Pascal/3. Semester Unterlagen/Systemprogrammierung/Praktikum/Systemprogrammierung/B03/cmake-build-debug/CMakeFiles/rebuild_cache.dir

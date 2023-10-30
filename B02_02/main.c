@@ -2,13 +2,9 @@
 #include "zoo.h"
 #include "string.h"
 
-animal mammal, fish, amphibian, bird;
-
-animal zoo[ANIMALCOUNT];
-
 int main()
 {
-
+    animal mammal, fish, amphibian, bird;
     float durchschnitt;
     mammal.species = MAMMAL;
     mammal.food_weight = 20;
@@ -35,15 +31,20 @@ int main()
     zoo[2] = amphibian;
     zoo[3] = bird;
 
-    durchschnitt = calculate_average_age(zoo);
+    durchschnitt = calculate_average_age();
     printf("%.2f\n\n", durchschnitt);
 
+    printf("%-15s| %-15s| %-15s| %-15s|\n", "Tier Name","Spezies","Alter", "Essens Gewicht");
+    printf("-------------------------------------------------------------------\n");
     print_animal(zoo[0]);
     print_animal(zoo[1]);
     print_animal(zoo[2]);
+    print_animal(zoo[4]);
     print_animal(zoo[3]);
 
-    more_food(zoo);
-    print_zoo(zoo);
+    printf("\n");
+    more_food();
+
+    print_zoo();
     return 0;
 }
