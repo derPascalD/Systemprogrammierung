@@ -4,7 +4,7 @@
 
 typedef struct{
     char name[20];
-    char enrolled[5];
+    char enrolled[2];
     int cps;
 }stdnt;
 
@@ -14,8 +14,11 @@ struct node{
     struct node *next;
 };
 
-void addStudent(stdnt);
-void printStudents(struct node);
+
+void addStudentMainList(stdnt);
+void printMainList(void);
+void printIfmStudents(void);
+void printStudentsSortedByEcts(void);
 
 
 
