@@ -1,25 +1,31 @@
 #ifndef VERWALTUNG_H
 #define VERWALTUNG_H
 
+typedef enum{
+    IFM,
+    BIO,
+    MATHE,
+    ENG,
+    SOZIAL
+}Modul;
 
 typedef struct{
     char name[20];
-    char enrolled[2];
-    int cps;
-}stdnt;
+    Modul enrolled;
+    unsigned int cps;
+}Stdnt;
 
-struct node{
-    stdnt stdnt;
+typedef struct node{
+    Stdnt stdnt;
     struct node *prev;
     struct node *next;
-};
+}Node;
 
-
-void addStudentMainList(stdnt);
-void printMainList(void);
+void addStudentMainList(Stdnt);
+void print(Node*);
 void printIfmStudents(void);
 void printStudentsSortedByEcts(void);
-
-
+void speicherFreigeben(void);
+void removeStudent(Stdnt);
 
 #endif

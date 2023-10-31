@@ -3,7 +3,7 @@
 #include "zoo.h"
 
 /* Errechnet das Durchschnittsalter von allen Tieren im Zoo*/
-float calculate_average_age() {
+float calculate_average_age(animal zoo[]) {
     float summeAlter = 0;
     int anzahlTiere = 0;
     int i;
@@ -18,7 +18,7 @@ float calculate_average_age() {
 }
 
 /*Hier bekommen die Tiere mehr Futter zugewiesen*/
-void more_food() {
+void more_food(animal zoo[]) {
     int counter = 0;
     while (counter < ANIMALCOUNT)
     {
@@ -50,7 +50,7 @@ void print_animal(animal a) {
 }
 
 /*Hier werden von allen Tieren im Zoo, die jeweiligen Informationen ausgegeben*/
-void print_zoo(){
+void print_zoo(animal zoo[]){
     int i;
     printf("%-15s| %-15s| %-15s| %-15s|\n", "Tier Name","Spezies","Alter", "Essens Gewicht");
     printf("-------------------------------------------------------------------\n");

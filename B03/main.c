@@ -4,16 +4,19 @@
 int main()
 {
 
-    stdnt st1 = {"Pascal", "J", 50};
-    stdnt st2 = {"Olli", "J", 60};
-    stdnt st3 = {"Philip", "N", 60};  
-    stdnt st4 = {"PascalS", "N", 60}; 
+    Stdnt st1 = {"Pascal",IFM, 45};
+    Stdnt st2 = {"Olli", IFM, 60};
+    Stdnt st3 = {"Philip", MATHE, 10};
+    Stdnt st4 = {"PascalS", BIO, 30};
+
+    printIfmStudents();
     addStudentMainList(st1);
     addStudentMainList(st2);
     addStudentMainList(st3);
     addStudentMainList(st4);
+      removeStudent(st2);
     printMainList();
- 
-
-
+    printIfmStudents();
+    printMainList();
+    /*printStudentsSortedByEcts();*/
 }
