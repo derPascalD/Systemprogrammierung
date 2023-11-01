@@ -4,7 +4,7 @@
 #include "string.h"
 
 Node *mainList, *ifm_students, *students_sorted_by;
-void addStudentMainList(Stdnt student)
+void addStudentMainList(Stdnt *student)
 {
     Node *prev, *root;
     root = mainList;
@@ -18,6 +18,7 @@ void addStudentMainList(Stdnt student)
             printf("Kein Speicher freigegeben\n\n");
             return;
         }
+
         mainList->stdnt = student;
     }
     else
@@ -50,6 +51,7 @@ void addStudentMainList(Stdnt student)
 
 void printMainList()
 {
+    printf("Main Liste\n");
     print(mainList);
 }
 
@@ -57,7 +59,7 @@ void print(Node *list)
 {
     if (!list)
     {
-        printf("Main List ist leer!\n\n");
+        printf("Liste ist leer!\n\n");
         return;
     }
 
@@ -65,7 +67,19 @@ void print(Node *list)
     int counter = 0;
     while (list != NULL)
     {
-        printf("prev-> %-15p | Node %d: %-15p | next-> %-15p\n", list->prev, counter, list, list->next);
+        if (list->prev == NULL)
+        {
+            printf("prev-> %-15s | %-7s Node %d: %-16p |next-> %p\n", "/", list->stdnt->name, counter, list->stdnt, list->next->stdnt);
+        }
+        else if (list->next == NULL)
+        {
+            printf("prev-> %-15p | %-7s Node %d: %-16p |next-> %s\n", list->prev->stdnt, list->stdnt->name, counter, list->stdnt, "/");
+        }
+        else
+        {
+            printf("prev-> %-15p | %-7s Node %d: %-16p |next-> %p\n", list->prev->stdnt, list->stdnt->name, counter, list->stdnt, list->next->stdnt);
+        }
+
         list = list->next;
         counter++;
     }
@@ -81,13 +95,15 @@ void printIfmStudents()
     }
 
     int counter = 0;
-    Node *prev, *header, *root;
+    Node *header, *root;
     root = mainList;
 
     while (mainList != NULL)
     {
-        if (mainList->stdnt.enrolled == IFM)
+
+        if (mainList->stdnt->enrolled == IFM)
         {
+
             if (mainList->prev == NULL)
             {
                 ifm_students = (Node *)malloc(sizeof(Node));
@@ -98,6 +114,7 @@ void printIfmStudents()
                     printf("Kein Speicher zugewiesen\n\n");
                     return;
                 }
+
                 ifm_students->stdnt = mainList->stdnt;
             }
             else
@@ -117,10 +134,15 @@ void printIfmStudents()
         }
         mainList = mainList->next;
     }
-    ifm_students = header;
     mainList = root;
     printf("Die Länge der IFM_Students Liste ist %d.\n\n", counter);
-    print(ifm_students);
+
+    if (counter > 0)
+    {
+        ifm_students = header;
+        printf("IFM Liste\n");
+        print(ifm_students);
+    }
 }
 
 void printStudentsSortedByEcts()
@@ -132,7 +154,8 @@ void printStudentsSortedByEcts()
         return;
     }
 
-    Node *tempNode = mainList;
+    Node *tempNode, *header;
+    tempNode = mainList;
     int counter = 0;
     while (tempNode != NULL)
     {
@@ -141,48 +164,66 @@ void printStudentsSortedByEcts()
     }
 
     tempNode = mainList;
-    
-    Node *liste[counter];
+
+    Stdnt *studentList[counter];
 
     for (int i = 0; i < counter; i++)
     {
-        liste[i] = tempNode;
+        studentList[i] = tempNode->stdnt;
         tempNode = tempNode->next;
     }
 
-    
-
-    for (int i = 0; i < counter; i++)
+    Stdnt *tempStd;
+    for (int i = 1; i < counter; i++)
     {
-        for (int j = 0; j < counter-1; j++)
+        for (int j = 0; j < counter - i; j++)
         {
-            if(liste[j]->stdnt.cps > liste[j+1]->stdnt.cps){
-                int cps = liste[j]->stdnt.cps;
-                liste[j]->stdnt.cps = liste[j+1]->stdnt.cps;
-                liste[j+1]->stdnt.cps = cps;
+            if (studentList[j]->cps > studentList[j + 1]->cps)
+            {
+                tempStd = studentList[j];
+                studentList[j] = studentList[j + 1];
+                studentList[j + 1] = tempStd;
             }
         }
     }
 
     for (int i = 0; i < counter; i++)
     {
-        printf("Name: %s ; Cps: %d\n",liste[i]->stdnt.name,liste[i]->stdnt.cps);
+        if (students_sorted_by == NULL)
+        {
+            students_sorted_by = (Node *)malloc(sizeof(Node));
+            header = students_sorted_by;
+            students_sorted_by->stdnt = studentList[i];
+        }
+        else
+        {
+            students_sorted_by->next = (Node *)malloc(sizeof(Node));
+
+            students_sorted_by->next->stdnt = studentList[i];
+            students_sorted_by->next->prev = students_sorted_by;
+            students_sorted_by = students_sorted_by->next;
+        }
     }
-    
-
-
-    
+    printf("Die Länge der Students_sorted_by_Ects Liste ist %d.\n\n", counter);
+    printf("\n");
+    if (counter > 0)
+    {
+        students_sorted_by = header;
+        printf("Students_sorted_by_Ects\n");
+        print(students_sorted_by);
+    }
 }
 
-
-void removeStudent(Stdnt student){
+void removeStudent(Stdnt *student)
+{
 
     Node *root = mainList;
     int counter = 0;
     while (mainList != NULL)
     {
 
-        if(!strcmp(student.name,mainList->stdnt.name)){
+        if (!strcmp(student->name, mainList->stdnt->name))
+        {
             printf("Hat geklappt");
         }
         mainList = mainList->next;
@@ -191,7 +232,7 @@ void removeStudent(Stdnt student){
     mainList = root;
     printf("\n");
 }
-void speicherFreigeben()
+void speicherFreigebenMain()
 {
     free(mainList);
     mainList = NULL;

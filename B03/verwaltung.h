@@ -16,16 +16,16 @@ typedef struct{
 }Stdnt;
 
 typedef struct node{
-    Stdnt stdnt;
+    Stdnt *stdnt;
     struct node *prev;
     struct node *next;
 }Node;
 
-void addStudentMainList(Stdnt);
+void addStudentMainList(Stdnt*);
 void print(Node*);
 void printIfmStudents(void);
 void printStudentsSortedByEcts(void);
 void speicherFreigeben(void);
-void removeStudent(Stdnt);
+void removeStudent(Stdnt*);
 
 #endif
