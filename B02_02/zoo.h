@@ -18,10 +18,10 @@ typedef struct {
     float food_weight;
 } animal;
 
-float calculate_average_age(animal[]);
+float calculate_average_age();
 
-void more_food(animal[]);
-void print_zoo(animal[]);
+void more_food();
+void print_zoo();
 void print_animal(animal);
 
 #endif
