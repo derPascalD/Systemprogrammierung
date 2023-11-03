@@ -2,13 +2,12 @@
 #include "string.h"
 #include "zoo.h"
 
-animal zoo[ANIMALCOUNT] = {
+ animal zoo[ANIMALCOUNT] = {
     {MAMMAL, "Hase",5, 20},
     {FISH, "Karpfen", 2, 25},
     {AMPHIBIAN, "Froesche", 3, 30},
     {BIRD, "Taube",4, 40}
 };
-
 
 /* Errechnet das Durchschnittsalter von allen Tieren im Zoo*/
 float calculate_average_age() {
