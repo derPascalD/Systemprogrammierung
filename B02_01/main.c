@@ -9,7 +9,7 @@ typedef enum
     FISH = 4,
     BIRD = 1,
     AMPHIBIAN = 2,
-    REPTILIES = 4
+    REPTILIES = 0
 } viech;
 
 typedef struct
@@ -33,7 +33,7 @@ int main()
     float durchschnitt;
 
     mammal.species = MAMMAL;
-    mammal.food_weight = 20;
+    mammal.food_weight = 25;
     strcpy(mammal.name, "Hase");
     mammal.age = 5;
 
@@ -58,9 +58,9 @@ int main()
     zoo[3] = bird;
 
     durchschnitt = calculate_average_age();
-    printf("%.2f\n\n", durchschnitt);
+    printf("Durchschnitt: %.2f\n\n", durchschnitt);
 
-    more_food();
+
 
     printf("%-15s| %-15s| %-15s| %-15s|\n", "Tier Name", "Spezies", "Alter", "Essens Gewicht");
     printf("-------------------------------------------------------------------\n");
@@ -69,6 +69,9 @@ int main()
     printf("\n");
     print_animal(zoo[4]);
     print_animal(zoo[5]);
+
+    more_food();
+
     print_zoo();
     return 0;
 }
@@ -96,11 +99,10 @@ float calculate_average_age()
 void more_food()
 {
     int counter = 0;
-    while (zoo[counter].age > 0)
+    while (counter < ANIMALCOUNT)
     {
 
         zoo[counter].food_weight += (zoo[counter].species * zoo[counter].food_weight) / 100;
-        printf("%.2f\n", zoo[counter].food_weight);
         counter++;
     }
     printf("\n");
@@ -110,23 +112,23 @@ void more_food()
 void print_animal(animal a)
 {
     char name[10];
-    if (a.species == MAMMAL)
+    if (a.species == MAMMAL && a.age != 0)
     {
         strcpy(name, "Mammal");
     }
-    else if (a.species == FISH)
+    else if (a.species == FISH && a.age != 0)
     {
         strcpy(name, "Fish");
     }
-    else if (a.species == BIRD)
+    else if (a.species == BIRD && a.age != 0)
     {
         strcpy(name, "Bird");
     }
-    else if (a.species == AMPHIBIAN)
+    else if (a.species == AMPHIBIAN && a.age != 0)
     {
         strcpy(name, "Amphibian");
     }
-    else if (a.species == REPTILIES)
+    else if (a.species == REPTILIES && a.age != 0)
     {
         strcpy(name, "Reptilies");
     }
