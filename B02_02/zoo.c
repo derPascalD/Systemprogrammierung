@@ -2,7 +2,7 @@
 #include "string.h"
 #include "zoo.h"
 
- animal zoo[ANIMALCOUNT] = {
+ static animal zoo[ANIMALCOUNT] = {
     {MAMMAL, "Hase",5, 20},
     {FISH, "Karpfen", 2, 25},
     {AMPHIBIAN, "Froesche", 3, 30},
@@ -69,6 +69,16 @@ void print_zoo(){
     }
     printf("\n");
 }
+
+void setAnnimalinZoo(animal a, int pos){
+   zoo[pos] = a;
+
+}
+
+animal getAnimalinZoo(int pos){
+    return zoo[pos];
+}
+
 
 
 

@@ -25,7 +25,7 @@ void more_food(void);
 void print_animal(animal);
 void print_zoo(void);
 
-animal zoo[10];
+animal zoo[ANIMALCOUNT];
 
 int main()
 {
