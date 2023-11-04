@@ -70,7 +70,7 @@ void print_zoo(){
     printf("\n");
 }
 
-void setAnnimalinZoo(animal a, int pos){
+void setAnimalinZoo(animal a, int pos){
    zoo[pos] = a;
 
 }

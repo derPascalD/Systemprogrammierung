@@ -24,7 +24,7 @@ void more_food();
 void print_zoo();
 void print_animal(animal);
 
-void setAnnimalinZoo(animal, int);
+void setAnimalinZoo(animal, int);
 animal getAnimalinZoo(int);
 
 #endif
