@@ -5,18 +5,24 @@ int main()
 {
 
   Stdnt st1 = {"Pascal", IFM, 45};
-  Stdnt st2 = {"Olli", ENG, 60};
-  Stdnt st3 = {"Philip", MATHE, 10};
-  Stdnt st4 = {"PascalS", IFM, 30};
-
-  printIfmStudents();
+  Stdnt st2 = {"Olli", IFM, 60};
+  Stdnt st3 = {"Philip", BIO ,10};
+  Stdnt st4 = {"PascalS", BIO, 30};
   addStudentMainList(&st1);
   addStudentMainList(&st2);
   addStudentMainList(&st3);
   addStudentMainList(&st4);
   printMainList();
-  printIfmStudents();
+  createIfmList();
+  createSortedByEctsList();
+  removeStudent(&st4, 0);
   printMainList();
-  printStudentsSortedByEcts();
-  /* removeStudent(st2);*/
+  createIfmList();
+  createSortedByEctsList();
+  memoryFreeIFM();
+  memoryFreeIFM();
+  memoryFreeSortedStdntByEcts();
+  memoryFreeSortedStdntByEcts();
+  memoryFreeMain();
+  
 }

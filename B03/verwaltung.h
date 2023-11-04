@@ -23,9 +23,11 @@ typedef struct node{
 
 void addStudentMainList(Stdnt*);
 void print(Node*);
-void printIfmStudents(void);
-void printStudentsSortedByEcts(void);
-void speicherFreigeben(void);
-void removeStudent(Stdnt*);
+void createIfmList(void);
+void createSortedByEctsList(void);
+void memoryFreeIFM(void);
+void memoryFreeSortedStdntByEcts(void);
+void memoryFreeMain(void);
+void removeStudent(Stdnt*,int);
 
 #endif
