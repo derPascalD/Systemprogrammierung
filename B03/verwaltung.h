@@ -22,12 +22,18 @@ typedef struct node{
 }Node;
 
 void addStudentMainList(Stdnt*);
-void print(Node*);
+void printList(Node*);
+void printNodeCount(Node*);
 void createIfmList(void);
 void createSortedByEctsList(void);
-void memoryFreeIFM(void);
-void memoryFreeSortedStdntByEcts(void);
+void memoryFreeIfmList();
+void memoryFreeSortedStdntByEcts();
 void memoryFreeMain(void);
-void removeStudent(Stdnt*,int);
+void removeStudent(Node*,Stdnt*,int);
+Node* getMainList(void);
+Node* getIfmList(void);
+Node* getSortedStdntByEcts(void);
+void setIfmList(Node*);
+void setSortedStdntByEcts(Node*);
 
 #endif

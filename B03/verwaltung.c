@@ -39,7 +39,7 @@ void addStudentMainList(Stdnt *student)
                 mainList->next->stdnt = student;
                 mainList->next->prev = mainList;
                 mainList = root;
-                return;
+                break;
             }
             else
             {
@@ -47,15 +47,11 @@ void addStudentMainList(Stdnt *student)
             }
         }
     }
+
+    
 }
 
-void printMainList()
-{
-    printf("Main Liste\n");
-    print(mainList);
-}
-
-void print(Node *list)
+void printList(Node *list)
 {
 
     if (!list)
@@ -85,6 +81,23 @@ void print(Node *list)
         counter++;
     }
     printf("\n");
+}
+
+void printNodeCount(Node *list){
+
+    if(list == NULL){
+        printf("Es sind noch keine Knoten vorhanden.\n");
+        return;
+    }
+    Node *current = list;
+    int counter = 0;
+    
+    while (current != NULL)
+    {
+        counter++;
+        current = current->next;
+    }
+    printf("Die Liste hat aktuell %d Knoten.\n",counter);
 }
 
 void createIfmList()
@@ -138,12 +151,7 @@ void createIfmList()
         root = root->next;
     }
 
-    printf("Länge der IFM Liste ist %d.\n\n",counter);
-    if (counter > 0)
-    {
-        printf("IFM Liste\n");
-        print(ifm_students);
-    }
+    printf("Die Länge der IFM Liste ist %d.\n\n",counter);
 }
 
 void createSortedByEctsList()
@@ -205,30 +213,16 @@ void createSortedByEctsList()
             students_sorted_by = students_sorted_by->next;
         }
     }
+    students_sorted_by = head;
     printf("Die Länge der Students_sorted_by_Ects Liste ist %d.\n\n", counter);
-    printf("\n");
-    if (counter > 0)
-    {
-        students_sorted_by = head;
-        printf("Students_sorted_by_Ects\n");
-        print(students_sorted_by);
-    }
 }
 
 /* Löscht einen Studenten aus der Main List und verknüpft sich mit dem anderen Knoten */
-void removeStudent(Stdnt *student, int modus)
-{
-    Node *current = mainList;
-    int counter = 0;
-    while (current != NULL)
-    {
-        counter++;
-        current = current->next;
-    }
+void removeStudent(Node *list, Stdnt *student, int modus)
 
-    printf("Die Länge beträgt vor dem Löschen %d.\n\n", counter);
-
-    current = mainList;
+    
+{   
+    Node *current = list;
     while (current != NULL)
     {
         if (student == current->stdnt)
@@ -236,10 +230,18 @@ void removeStudent(Stdnt *student, int modus)
             if (current->prev == NULL)
             {
                 current->next->prev = NULL;
-                mainList = current->next;
+                
+                if(mainList == list){
+                   mainList = current->next;
+                }else if(ifm_students == list){
+                   ifm_students = current->next;
+                }else if(students_sorted_by == list){
+                    students_sorted_by = current->next;
+                }
+
                 current->next = NULL;
                 current->prev = NULL;
-                
+
             }
             else if (current->next == NULL)
             {
@@ -258,88 +260,65 @@ void removeStudent(Stdnt *student, int modus)
             if (modus == 1)
             {
                 current->stdnt = NULL;
+                free(current->stdnt);
             }
             else if (modus == 0)
             {
                 current->stdnt = NULL;
             }
-
+             
             free(current);
             current = NULL;
-
-            current = mainList;
-            counter = 0;
-            while (current != NULL)
-            {
-                counter++;
-                current = current->next;
-            }
-            printf("Die Länge beträgt nach dem Löschen %d.\n\n", counter);
+        
             return;
         }
         current = current->next;
     }
 }
 
-void memoryFreeIFM()
-{
+void memoryFreeIfmList(){
     if(ifm_students == NULL){
         printf("Hilfsliste ist leer!\n");
         return;
     }
 
-    Node *head, *prev;
-    head = ifm_students;
-    int counter = 0;
+    Node *next;
+    int counter = 1;
+
+
     while (ifm_students->next != NULL)
     {
-
-        ifm_students = ifm_students->next;
-    }
-
-    while(ifm_students != NULL){
-
-        prev = ifm_students->prev;
-
-        free(ifm_students);
-        ifm_students = NULL;
-
-        ifm_students = prev;
+        next = ifm_students->next;
+        removeStudent(ifm_students,ifm_students->stdnt,0);
+        ifm_students = next;
         counter++;
-        
     }
-    printf("%d Knoten wurden entfernt und Speicher der Hilfsliste wurde freigegben!\n", counter);
+    ifm_students = NULL;
+
+    
+    printf("%d Knoten wurden entfernt und Speicher der IFM Hilfsliste wurde freigegben!\n", counter);
  
 }
 
 void memoryFreeSortedStdntByEcts(){
     if(students_sorted_by == NULL){
-        printf("Hilflsiste ist leer!\n");
+        printf("Hilfsliste ist leer!\n");
         return;
     }
 
-    Node *head, *prev;
-    head = students_sorted_by;
-    int counter = 0;
+    Node *next;
+    int counter = 1;
+
+
     while (students_sorted_by->next != NULL)
     {
-  
-        students_sorted_by = students_sorted_by->next;
-    }
-
-    while(students_sorted_by != NULL){
-
-        
-        prev = students_sorted_by->prev;
-
-        free(students_sorted_by);
-        students_sorted_by = NULL;
-
-        students_sorted_by = prev;
+        next = students_sorted_by->next;
+        removeStudent(students_sorted_by,students_sorted_by->stdnt,0);
+        students_sorted_by = next;
         counter++;
-        
     }
-    printf("%d Knoten wurden entfernt und Speicher der Hilfsliste wurde freigegben!\n", counter);
+    students_sorted_by = NULL;
+    printf("%d Knoten wurden entfernt und Speicher der Sortierten Hilfsliste wurde freigegben!\n", counter);
  
 }
 
@@ -350,28 +329,52 @@ void memoryFreeMain()
         return;
     }
 
-    Node *head, *prev;
-    head = mainList;
-    int counter = 0;
+    Node *next;
+    int counter = 1;
+
+
     while (mainList->next != NULL)
     {
-
-        mainList = mainList->next;
-    }
-
-    while(mainList != NULL){
-
-        prev = mainList->prev;
-
-        free(mainList);
-        mainList = NULL;
-   
-
-        mainList = prev;
+        next = mainList->next;
+        removeStudent(mainList,mainList->stdnt,1);
+        mainList = next;
         counter++;
-        
     }
+    mainList = NULL;
+
     printf("%d Knoten wurden entfernt und Speicher der Mainliste wurde freigegben!\n", counter);
 
 }
 
+Node* getMainList(){
+    if(mainList != NULL){
+        return mainList;
+    }else{
+        return NULL;
+    }
+}
+
+Node* getIfmList(){
+    if(ifm_students != NULL){
+        return ifm_students;
+    }else{
+        return NULL;
+    }
+}
+
+Node* getSortedStdntByEcts(){
+    if(students_sorted_by != NULL){
+        return students_sorted_by;
+    }else{
+        return NULL;
+    }
+}
+
+void setIfmList(Node* list){
+    ifm_students = list;
+}
+
+void setSortedStdntByEcts(Node* list){
+    students_sorted_by = list;
+
+}
