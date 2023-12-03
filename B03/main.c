@@ -1,13 +1,11 @@
 #include <stdio.h>
 #include "verwaltung.h"
 
-Node* test;
-
 int main()
 {
   Stdnt st1 = {"Pascal", IFM, 45};
   Stdnt st2 = {"Olli", IFM, 60};
-  Stdnt st3 = {"Philip", BIO ,10};
+  Stdnt st3 = {"Philip", BIO, 10};
   Stdnt st4 = {"PascalS", IFM, 30};
   printNodeCount(getMainList());
   addStudentMainList(&st1);
@@ -17,7 +15,7 @@ int main()
   printNodeCount(getMainList());
   printf("Main Liste\n");
   printList(getMainList());
-  
+
   printNodeCount(getIfmList());
   createIfmList();
   printNodeCount(getIfmList());
@@ -30,7 +28,11 @@ int main()
   printf("Sortierte Liste\n");
   printList(getSortedStdntByEcts());
 
-  removeStudent(getMainList(),&st2, 0);
+  printNodeCount(getMainList());
+  removeStudent(getMainList(), &st2, 1);
+  printNodeCount(getMainList());
+
+  printf("Nach dem Löschen anzeigen\n");
 
   printf("Main Liste\n");
   printList(getMainList());
@@ -41,6 +43,7 @@ int main()
   printf("Sortierte Liste\n");
   printList(getSortedStdntByEcts());
 
+  printf("Nach dem Löschen erstellen\n");
   createIfmList();
   printf("IFM Liste\n");
   printList(getIfmList());
@@ -49,6 +52,7 @@ int main()
   printf("Sortierte Liste\n");
   printList(getSortedStdntByEcts());
 
+  printf("Speicher freigeben\n");
   memoryFreeIfmList();
   memoryFreeSortedStdntByEcts();
   memoryFreeMain();
@@ -61,7 +65,6 @@ int main()
 
   printf("Main Liste\n");
   printList(getMainList());
-  
 
-
+  return 0;
 }

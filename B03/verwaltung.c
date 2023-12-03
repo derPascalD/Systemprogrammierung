@@ -6,7 +6,7 @@
 Node *mainList = NULL, *ifm_students = NULL, *students_sorted_by = NULL;
 void addStudentMainList(Stdnt *student)
 {
-    Node *prev, *root;
+    Node *root;
     root = mainList;
 
     if (mainList == NULL)
@@ -47,8 +47,6 @@ void addStudentMainList(Stdnt *student)
             }
         }
     }
-
-    
 }
 
 void printList(Node *list)
@@ -66,15 +64,15 @@ void printList(Node *list)
         
         if (list->prev == NULL)
         {
-            printf("prev-> %-15s | %-7s Node %d: %-16p |next-> %p\n", "/", list->stdnt->name, counter, list, list->next);
+            printf("prev-> %-15s | %-7s Node %d: %-16p |next-> %p\n", "/", list->stdnt->name, counter,(void *) list,(void *) list->next);
         }
         else if (list->next == NULL)
         {
-            printf("prev-> %-15p | %-7s Node %d: %-16p |next-> %s\n", list->prev, list->stdnt->name, counter, list, "/");
+            printf("prev-> %-15p | %-7s Node %d: %-16p |next-> %s\n",(void *) list->prev, list->stdnt->name, counter,(void *) list, "/");
         }
         else
         {
-            printf("prev-> %-15p | %-7s Node %d: %-16p |next-> %p\n", list->prev, list->stdnt->name, counter, list, list->next);
+            printf("prev-> %-15p | %-7s Node %d: %-16p |next-> %p\n",(void *) list->prev, list->stdnt->name, counter,(void *) list,(void *) list->next);
         }
 
         list = list->next;
@@ -113,13 +111,11 @@ void createIfmList()
     Node *root, *helpList;
     root = mainList;
 
-
     while (root != NULL)
     {
 
         if (root->stdnt->enrolled == IFM)
         {
-
 
            if (ifm_students == NULL)
             {
@@ -134,11 +130,16 @@ void createIfmList()
                 ifm_students->next = NULL;
                 ifm_students->prev = NULL;
                 helpList = ifm_students;
-
             }
             else
             {
                 helpList->next = (Node *)malloc(sizeof(Node));
+
+                if (helpList == NULL)
+                {
+                    printf("Kein Speicher zugewiesen\n\n");
+                    return;
+                }
                 
                 helpList->next->stdnt = root->stdnt;
                 helpList->next->next = NULL;
@@ -201,12 +202,23 @@ void createSortedByEctsList()
         if (students_sorted_by == NULL)
         {
             students_sorted_by = (Node *)malloc(sizeof(Node));
+
+            if (students_sorted_by == NULL)
+                {
+                    printf("Kein Speicher zugewiesen\n\n");
+                    return;
+                }
             head = students_sorted_by;
             students_sorted_by->stdnt = studentList[i];
         }
         else
         {
             students_sorted_by->next = (Node *)malloc(sizeof(Node));
+
+            if(students_sorted_by->next == NULL){
+                printf("Kein Speicher zugewiesen\n\n");
+                return;
+            }
 
             students_sorted_by->next->stdnt = studentList[i];
             students_sorted_by->next->prev = students_sorted_by;
@@ -218,9 +230,7 @@ void createSortedByEctsList()
 }
 
 /* Löscht einen Studenten aus der Main List und verknüpft sich mit dem anderen Knoten */
-void removeStudent(Node *list, Stdnt *student, int modus)
-
-    
+void removeStudent(Node *list, Stdnt *student, int modus) 
 {   
     Node *current = list;
     while (current != NULL)
@@ -295,9 +305,7 @@ void memoryFreeIfmList(){
     }
     ifm_students = NULL;
 
-    
     printf("%d Knoten wurden entfernt und Speicher der IFM Hilfsliste wurde freigegben!\n", counter);
- 
 }
 
 void memoryFreeSortedStdntByEcts(){
@@ -309,7 +317,6 @@ void memoryFreeSortedStdntByEcts(){
     Node *next;
     int counter = 1;
 
-
     while (students_sorted_by->next != NULL)
     {
         next = students_sorted_by->next;
@@ -319,7 +326,6 @@ void memoryFreeSortedStdntByEcts(){
     }
     students_sorted_by = NULL;
     printf("%d Knoten wurden entfernt und Speicher der Sortierten Hilfsliste wurde freigegben!\n", counter);
- 
 }
 
 void memoryFreeMain()
@@ -376,5 +382,4 @@ void setIfmList(Node* list){
 
 void setSortedStdntByEcts(Node* list){
     students_sorted_by = list;
-
 }
