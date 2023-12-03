@@ -1,0 +1,3 @@
+C:/Users/pasca/Desktop/Systemprogrammierung/B05/cmake-build-debug/CMakeFiles/B05.dir
+C:/Users/pasca/Desktop/Systemprogrammierung/B05/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/pasca/Desktop/Systemprogrammierung/B05/cmake-build-debug/CMakeFiles/rebuild_cache.dir
